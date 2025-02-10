@@ -9,8 +9,23 @@
 * UHealth::Damage will call the base class (UHealths) damage funtion not the Armoured Health Damage
 * 
 */
+
+UArmouredHealth::UArmouredHealth()
+{
+	Armour = MaxArmour;
+}
+
 void UArmouredHealth::TakeDamage(int Damage)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Armoured Health took no damage! you might want to change that"));
-	Super::TakeDamage(Damage);
+
+	//UE_LOG(LogTemp, Warning, TEXT("Armoured Health took no damage! you might want to change that"));
+	if (Armour > 0)
+	{
+		Armour -= Damage;
+		UE_LOG(LogTemp,Warning, TEXT("Armour Damaged"));
+	}
+	else
+	{
+		Super::TakeDamage(Damage);
+	}
 }
